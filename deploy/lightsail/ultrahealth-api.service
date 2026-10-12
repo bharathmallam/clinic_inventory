@@ -1,0 +1,30 @@
+# The Python app, run by Gunicorn and kept alive by systemd.
+# Installed by install.sh as /etc/systemd/system/ultrahealth-api.service.
+[Unit]
+Description=Ultrahealth Inventory API (Gunicorn)
+After=network.target mysql.service
+Wants=mysql.service
+
+[Service]
+User=inventory
+Group=inventory
+WorkingDirectory=/srv/ultrahealth/inventory_api
+# SECRET_KEY, DATABASE_URL and APP_ENV: readable by root and this service only.
+# It also sets WEB_CONCURRENCY, which Gunicorn reads as its number of worker
+# processes: 2 with MySQL, 1 in the demo (one SQLite file, 512 MB of memory).
+EnvironmentFile=/etc/ultrahealth/inventory.env
+ExecStart=/srv/ultrahealth/venv/bin/gunicorn --bind 127.0.0.1:8000 \
+    --threads 4 --timeout 60 --no-control-socket \
+    --access-logfile - --error-logfile - \
+    wsgi:application
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=3
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

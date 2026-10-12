@@ -1,0 +1,12 @@
+# One database backup (manage.py backup). Started daily by ultrahealth-backup.timer.
+[Unit]
+Description=Ultrahealth Inventory database backup
+After=mysql.service
+
+[Service]
+Type=oneshot
+User=inventory
+Group=inventory
+WorkingDirectory=/srv/ultrahealth/inventory_api
+EnvironmentFile=/etc/ultrahealth/inventory.env
+ExecStart=/srv/ultrahealth/venv/bin/python manage.py backup

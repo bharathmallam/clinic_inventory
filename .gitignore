@@ -1,0 +1,15 @@
+# Installed or generated locally: the server installs its own from requirements.txt.
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Local databases, settings and backups: never in git.
+*.db
+*.sqlite3
+.env
+inventory_backups/
+
+# Build output and OS clutter.
+release/
+.DS_Store

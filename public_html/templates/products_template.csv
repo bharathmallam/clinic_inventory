@@ -1,0 +1,3 @@
+category,sku,name,unit,reorder_level,brand,hsn,pack_size,pack_label,opening_stock,batch_no,expiry_date
+Clinic Consumables,CC-GLV-L,Sterile Surgical Gloves (L),Piece,50,Gloveon,40151100,50,Box,250,2506244403,30/06/2030
+Pantry,PN-TEA-GRN,Green Tea Bags,Box,3,Tetley,09024010,,,10,,

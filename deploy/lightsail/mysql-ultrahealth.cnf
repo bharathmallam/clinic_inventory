@@ -1,0 +1,17 @@
+# Installed by install.sh as /etc/mysql/mysql.conf.d/zz-ultrahealth.cnf
+[mysqld]
+# Local connections only: the database is never reachable from the internet.
+bind-address = 127.0.0.1
+mysqlx = OFF
+character-set-server = utf8mb4
+collation-server = utf8mb4_0900_ai_ci
+default-time-zone = '+00:00'
+sql_mode = STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+# MySQL 8 keeps a binary log by default; without this, the app's account
+# (which has no SUPER) is refused when it installs the protective triggers.
+log_bin_trust_function_creators = 1
+binlog_expire_logs_seconds = 604800
+# Sized for a 2 GB Lightsail instance shared with the app.
+innodb_buffer_pool_size = 256M
+max_connections = 50
+performance_schema = OFF

@@ -1,0 +1,10 @@
+# Daily backup at 02:30 server time (Persistent: catches up if the server was off).
+[Unit]
+Description=Daily Ultrahealth Inventory backup
+
+[Timer]
+OnCalendar=*-*-* 02:30:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
